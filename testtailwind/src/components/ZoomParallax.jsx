@@ -23,7 +23,7 @@ export default function ZoomParallax({ imageUrl }) {
   const scaleValue = Math.min(1 + scrollPosition * 0.0008, 1.2);
   // 0.0005 controla qué tanto zoom hace
   //efecto borroso
-  const blurValue = Math.min(scrollPosition * 0.005, 5);
+  const blurValue = Math.min(scrollPosition * 0.005, 1.2);
 
   return (
     <div

@@ -1,8 +1,11 @@
 import fondo from "../assets/fondo2.png";
+import ZoomParallax from "./ZoomParallax";// zoom de la img
+
 
 // fondo gradiente
 const HeroSection = () => {
-  return (
+  return (    
+    
     <div
       id="inicio"
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
@@ -12,7 +15,9 @@ const HeroSection = () => {
           url(${fondo})
         `,
       }}
-    >
+    > 
+    <ZoomParallax imageUrl={fondo} />
+
       <div className="text-white text-center p-12 pt-24">
         <h1 className="text-8xl text-white tracking-tighter text-balance text-center text-shadow-lg/30">
           David Ramirez
