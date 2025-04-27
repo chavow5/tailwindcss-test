@@ -39,3 +39,8 @@ export default function ZoomParallax({ imageUrl }) {
     </div>
   );
 }
+
+
+// agregar en app.js
+
+// <ZoomParallax imageUrl="url-imagen" />
