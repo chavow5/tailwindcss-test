@@ -1,31 +1,46 @@
-import logo from "../assets/logodavidramirez.png";
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; // Iconos (puedes usar Heroicons o cualquier otro)
+import logo from "../assets/logodavidramirez.png"; // reemplaza con tu logo real
 
 const Header = () => {
-  return (
-    <header className="bg-black bg-opacity-60 text-white px-6 py-4 fixed top-0 left-0 w-full z-50 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <a href="inicio" className="flex items-center space-x-3">
-          <img src={logo} alt="Logo" className="h-15 w-auto" />
-          {/* <span className="text-2xl font-bold">MiLanding</span> */}
-        </a>
+  const [menuOpen, setMenuOpen] = useState(false);
 
-        {/* Navegacion */}
-        <nav className="space-x-6">
-          <a href="#inicio" className="hover:text-gray-300 transition">
-            Inicio
-          </a>
-          <a href="#sobre-mi" className="hover:text-gray-300 transition">
-            Sobre mí
-          </a>
-          <a href="#servicios" className="hover:text-gray-300 transition">
-            Servicios
-          </a>
-          <a href="#contacto" className="hover:text-gray-300 transition">
-            Contacto
-          </a>
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  return (
+    <header className="bg-black text-white fixed top-0 w-full z-50 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        {/* Logo */}
+        <div className="flex items-center">
+          <img src={logo} alt="Logo" className="h-10 mr-2" />
+          {/* <span className="text-xl font-semibold">CHAVO</span> */}
+        </div>
+
+        {/* Menú Desktop */}
+        <nav className="hidden md:flex space-x-8">
+          <a href="#inicio" className="hover:text-gray-300">Inicio</a>
+          <a href="#sobre" className="hover:text-gray-300">Sobre mí</a>
+          <a href="#servicios" className="hover:text-gray-300">Servicios</a>
+          <a href="#contacto" className="hover:text-gray-300">Contacto</a>
         </nav>
+
+        {/* Botón hamburguesa en mobile */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="focus:outline-none">
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
+
+      {/* Menú Mobile desplegable */}
+      {menuOpen && (
+        <div className="md:hidden bg-black px-4 pb-4 space-y-2">
+          <a href="#inicio" className="block hover:text-gray-300">Inicio</a>
+          <a href="#sobre" className="block hover:text-gray-300">Sobre mí</a>
+          <a href="#servicios" className="block hover:text-gray-300">Servicios</a>
+          <a href="#contacto" className="block hover:text-gray-300">Contacto</a>
+        </div>
+      )}
     </header>
   );
 };

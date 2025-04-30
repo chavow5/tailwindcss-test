@@ -1,30 +1,41 @@
+import { useState, useEffect } from "react";
 import fondo from "../assets/fondo2.png";
-import ZoomParallax from "./ZoomParallax";// zoom de la img
 
-
-// fondo gradiente
 const HeroSection = () => {
-  return (    
-    
-    <div
-      id="inicio"
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `
-          linear-gradient(to bottom, rgba(0,0,0,0.5), #1e1e1e),
-          url(${fondo})
-        `,
-      }}
-    > 
-    <ZoomParallax imageUrl={fondo} />
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-      <div className="text-white text-center p-12 pt-24">
-        <h1 className="text-8xl text-white tracking-tighter text-balance text-center text-shadow-lg/30">
+  const handleScroll = () => {
+    setScrollPosition(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scaleValue = Math.min(1 + scrollPosition * 0.0008, 1.2);
+  const blurValue = Math.min(scrollPosition * 0.005, 5);
+
+  return (
+    <div id="inicio" className="relative min-h-screen w-full overflow-hidden">
+      {/* Fondo con zoom */}
+      <div
+        className="absolute inset-0 w-full h-full transition-all duration-300 z-0"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), #1e1e1e), url(${fondo})`,
+          backgroundSize: `${scaleValue * 100}%`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          filter: `blur(${blurValue}px)`,
+        }}
+      />
+
+      {/* Contenido encima del fondo */}
+      <div className="relative z-10 text-white text-center p-12 pt-24">
+        <h1 className="text-5xl md:text-8xl font-bold tracking-tight text-shadow-md">
           David Ramirez
         </h1>
-        <p
-          className="text-lg uppercase text-white font-medium text-shadow-lg/30 text-center mt-4"
-        >
+        <p className="text-lg md:text-xl uppercase font-medium mt-4 text-shadow-md">
           Full Stack Web Developer.
         </p>
       </div>
